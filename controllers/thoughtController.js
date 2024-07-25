@@ -52,4 +52,57 @@ module.exports = {
             res.status(500).json(e);
         }
     },
+    async deleteThought(req, res) {
+        try {
+            const deletedThought = await Thought.findOneAndDelete({
+                _id: req.params.thoughtId,
+            });
+
+            if (!deletedThought) {
+                return res
+                    .status(404)
+                    .json({ message: "No thought with this ID" });
+            }
+
+            res.json(deletedThought);
+        } catch (e) {
+            res.status(500).json(e);
+        }
+    },
+    async createReaction(req, res) {
+        try {
+            const reaction = await Thought.findOneAndUpdate(
+                { _id: req.params.thoughtId },
+                { $addToSet: { reactions: req.body } }
+            );
+
+            if (!reaction) {
+                return res
+                    .status(404)
+                    .json({ message: "No thought with this ID" });
+            }
+
+            res.json(reaction);
+        } catch (e) {
+            res.status(500).json(e);
+        }
+    },
+    async deleteReaction(req, res) {
+        try {
+            const reaction = await Thought.findOneAndUpdate(
+                { _id: req.params.thoughtId },
+                { $pull: { reactions: { reactionId: req.params.reactionId } } }
+            );
+
+            if (!reaction) {
+                return res
+                    .status(404)
+                    .json({ message: "No thought with this ID" });
+            }
+
+            res.json(reaction);
+        } catch (e) {
+            res.status(500).json(e);
+        }
+    },
 };

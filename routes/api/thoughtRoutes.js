@@ -1,18 +1,41 @@
 const router = require("express").Router();
-const User = require("../../models/User");
 
-/*
+const {
+    getThoughts,
+    getSingleThought,
+    createThought,
+    deleteThought,
+    updateThought,
+} = require("../../controllers/thoughtController");
 
-/api/users
+/**
+ * /api/thoughts
 
-GET all users
+GET to get all thoughts
 
-GET a single user by its _id and populated thought and friend data
+GET to get a single thought by its _id
 
-POST a new user:*/
+POST to create a new thought (don't forget to push the created thought's _id to the associated user's thoughts array field)
 
-router.get("/", (req, res) => {
-    User.find({});
-});
+// example data
+{
+  "thoughtText": "Here's a cool thought...",
+  "username": "lernantino",
+  "userId": "5edff358a0fcb779aa7b118b"
+}
+PUT to update a thought by its _id
+
+DELETE to remove a thought by its _id
+
+/api/thoughts/:thoughtId/reactions
+
+POST to create a reaction stored in a single thought's reactions array field
+
+DELETE to pull and remove a reaction by the reaction's reactionId value
+*/
+
+router.route("/").get(getThoughts).post(createThought);
+router.route("/:thoughtId").get(getSingleThought);
+router.route("/:thoughtId/reactions").put(updateThought).delete(deleteThought);
 
 module.exports = router;

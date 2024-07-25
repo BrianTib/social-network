@@ -13,7 +13,7 @@ const userSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            match: [/.+@.+\..+/, "Must match a valid email address"],
+            match: /.+@.+\..+/,
         },
         thoughts: [
             {
@@ -32,7 +32,6 @@ const userSchema = new Schema(
         toJSON: {
             virtuals: true,
         },
-        id: false,
     }
 );
 

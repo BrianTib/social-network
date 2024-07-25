@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User, Thought } = require("../models");
 
 module.exports = {
     async getUsers(req, res) {
@@ -62,6 +62,10 @@ module.exports = {
                     .status(404)
                     .json({ message: "No user with this ID" });
             }
+
+            // Remove the user's associated thoughts
+            await Thought.deleteMany({ username: deletedUser.username });
+
             res.json(deletedUser);
         } catch (err) {
             res.status(500).json(err);

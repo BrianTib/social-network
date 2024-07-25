@@ -91,13 +91,13 @@ module.exports = {
         try {
             const reaction = await Thought.findOneAndUpdate(
                 { _id: req.params.thoughtId },
-                { $pull: { reactions: { reactionId: req.params.reactionId } } }
+                { $pull: { reactions: { reactionId: req.body.reactionId } } }
             );
 
             if (!reaction) {
                 return res
                     .status(404)
-                    .json({ message: "No thought with this ID" });
+                    .json({ message: "No thought or reaction with this ID" });
             }
 
             res.json(reaction);

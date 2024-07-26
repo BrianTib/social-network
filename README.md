@@ -18,7 +18,7 @@ clone the repo and run the npm command start
 
 # Links
 - [Github URL](https://github.com/BrianTib/social-network)
-- [Video Demonstration](https://github.com/BrianTib/social-network)
+- [Video Demonstration](https://drive.google.com/file/d/1OoUeb8JQADaJykbMbKSaXin0xY-d9DOf/view?usp=sharing)
 
 ## Questions
 
